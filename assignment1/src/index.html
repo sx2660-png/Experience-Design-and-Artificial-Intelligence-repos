@@ -1,0 +1,53 @@
+<h2>🎲 History events matching Game</h2>
+<h3>——Ashley‘s work——</h3>
+<p>Select a set of questions, drag and drop 6 event cards to arrange them in the correct chronological order, then submit and view the AI's comments.</p>
+<p>
+  Paste your <b>Gemini API Key</b> (classroom experiment only):
+</p>
+<input id="apiKey" placeholder="Gemini API Key" />
+
+<br><br>
+
+<div class="row">
+  <label>SELECT：</label>
+  <select id="deck"></select>
+  <button id="start">START GAME</button>
+</div>
+
+
+<div class="panel">
+  <div class="hint">
+    Drag cards into the 6 timeline slots. Then click <b>Check Timeline</b>.
+    Green = correct slot, Red = wrong slot.
+  </div>
+
+  <div class="statusbar" id="statusBar">
+    <span id="placedCount">0/6 placed</span>
+    <span class="pill" id="scoreBadge">Score: —</span>
+  </div>
+
+  <h3 id="deckTitle">Not started</h3>
+
+  <!-- Horizontal timeline slots -->
+  <div class="timeline-wrap">
+    <div id="timeline" class="timeline"></div>
+  </div>
+
+  <h4 class="bank-title">Card Bank</h4>
+
+  <!-- Card bank (shuffled cards) -->
+  <div id="bank" class="bank"></div>
+
+  <div class="actions">
+    <button id="submit" disabled>Check Timeline</button>
+    <button id="aiReview" disabled>AI Feedback</button>
+    <button id="reveal" disabled>Show Correct Order</button>
+  </div>
+</div>
+
+<h3>Results & Logs</h3>
+<div id="log" class="log"></div>
+
+<footer class="footer">
+  © 2026 Ashley XU‘s work for UXAI class. All rights reserved.
+</footer>

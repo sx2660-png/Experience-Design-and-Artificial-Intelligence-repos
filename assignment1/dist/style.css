@@ -1,0 +1,341 @@
+/* --------- Retro Timeline UI (Paste/Replace all CSS) --------- */
+:root{
+  --paper:#f6f1e2;
+  --paper2:#efe6cf;
+  --ink:#1f1b16;
+  --muted:#5c5147;
+  --line:#c6b89a;
+  --shadow: rgba(0,0,0,0.20);
+  --ok:#2f7d49;   /* stamp green */
+  --bad:#b43b2e;  /* stamp red */
+  --warn:#a06b1a;
+  --card:#fbf6e7;
+  --border:#d8c9a6;
+}
+
+/* Page */
+body{
+  max-width: 1040px;
+  margin: 16px auto;
+  padding: 0 14px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  background:
+    radial-gradient(900px 500px at 10% 0%, rgba(0,0,0,0.05) 0%, transparent 60%),
+    radial-gradient(700px 450px at 90% 10%, rgba(0,0,0,0.04) 0%, transparent 55%),
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 1px, transparent 2px, transparent 6px),
+    linear-gradient(180deg, var(--paper) 0%, var(--paper2) 100%);
+}
+
+/* Title vibe */
+h2{
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 0.5px;
+  margin: 10px 0 4px;
+  text-align: center;
+  display: block;
+}
+h3, h4{ 
+  margin: 10px 0 6px;display: block;text-align: center; }
+p{ color: var(--muted); margin: 6px 0 10px; }
+
+code{
+  background: rgba(0,0,0,0.06);
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+/* Inputs */
+input, select, button{
+  font-size: 15px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.65);
+  color: var(--ink);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+}
+
+/* Buttons: retro press */
+button{
+  cursor: pointer;
+  background: linear-gradient(180deg, #fff7dc 0%, #f0dfb3 100%);
+  border: 1px solid #cbb78f;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-family: "Courier New", Courier, monospace;
+}
+button:hover{
+  filter: brightness(1.03);
+}
+button:active{
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.10);
+}
+button:disabled{
+  opacity: .55;
+  cursor: not-allowed;
+  filter: grayscale(0.2);
+}
+
+#apiKey, #deck{ width: 100%; }
+
+.row{
+  display:flex;
+  gap: 10px;
+  align-items:center;
+  flex-wrap: wrap;
+}
+.row label{ min-width: 90px; color: var(--muted); }
+.row select{ flex: 1; min-width: 240px; }
+
+/* Main panel like a file folder */
+.panel{
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(500px 200px at 30% 0%, rgba(255,255,255,0.55), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0.20));
+  box-shadow: 0 14px 40px var(--shadow);
+}
+
+/* Hint box like a sticky note */
+.hint{
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: #fff4b8;
+  border: 1px solid #e3d28a;
+  color: #6a4a13;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Status bar */
+.statusbar{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  gap: 10px;
+  margin: 10px 0 6px;
+  color: var(--muted);
+  font-family: "Courier New", Courier, monospace;
+}
+
+.pill{
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px dashed #bda77d;
+  background: rgba(255,255,255,0.55);
+}
+
+/* Timeline wrapper like a long paper strip */
+.timeline-wrap{
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.35);
+  overflow-x: auto;
+}
+
+/* Horizontal timeline */
+.timeline{
+  position: relative;
+  display:flex;
+  gap: 14px;
+  align-items:flex-start;
+  min-width: 900px;
+  padding: 10px 6px 6px;
+}
+
+.timeline::before{
+  content:"";
+  position:absolute;
+  left: 10px;
+  right: 10px;
+  top: 52px;
+  height: 4px;
+  border-radius: 999px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(31,27,22,0.22) 0px,
+    rgba(31,27,22,0.22) 16px,
+    rgba(31,27,22,0.10) 16px,
+    rgba(31,27,22,0.10) 30px
+  );
+  opacity: .35;
+}
+
+/* Slot as a “blank photo frame” */
+.slot{
+  width: 150px;
+  min-height: 230px;
+  border-radius: 16px;
+  border: 2px dashed rgba(31,27,22,0.25);
+  background: rgba(255,255,255,0.35);
+  padding: 10px;
+  position: relative;
+}
+
+.slot .slot-index{
+  position:absolute;
+  top: 8px; left: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Over highlight like a pencil outline */
+.slot.over{
+  outline: 2px solid rgba(31,27,22,0.25);
+  outline-offset: 2px;
+}
+
+/* Stamp style: add a pseudo stamp label */
+.slot.correct, .slot.wrong{
+  border-style: solid;
+}
+
+.slot.correct{
+  border-color: rgba(47,125,73,0.55);
+  background: rgba(47,125,73,0.07);
+}
+.slot.wrong{
+  border-color: rgba(180,59,46,0.55);
+  background: rgba(180,59,46,0.07);
+}
+
+.slot.correct::after,
+.slot.wrong::after{
+  position:absolute;
+  right: 10px;
+  top: 10px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1px;
+  transform: rotate(-12deg);
+  opacity: .9;
+  border: 2px solid;
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  content: "";
+}
+
+.slot.correct::after{
+  content: "CORRECT";
+  color: var(--ok);
+  border-color: rgba(47,125,73,0.70);
+  background: rgba(47,125,73,0.10);
+}
+.slot.wrong::after{
+  content: "WRONG";
+  color: var(--bad);
+  border-color: rgba(180,59,46,0.75);
+  background: rgba(180,59,46,0.10);
+}
+
+/* Bank */
+.bank-title{ margin-top: 14px; color: var(--muted); font-family:"Courier New", Courier, monospace; }
+
+.bank{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* Event card as a “polaroid photo” */
+.event-card{
+  border-radius: 16px;
+  border: 1px solid rgba(31,27,22,0.18);
+  background: var(--card);
+  box-shadow: 0 16px 30px rgba(0,0,0,0.16);
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+}
+
+.event-card:active{ cursor: grabbing; }
+.event-card.dragging{ opacity: .65; }
+
+/* Old photo look */
+.event-thumb{
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display:block;
+  filter: sepia(0.25) contrast(1.05) saturate(0.90);
+}
+
+/* Polaroid lower white space */
+.event-body{
+  padding: 10px 12px 14px;
+  border-top: 1px solid rgba(31,27,22,0.08);
+}
+
+.event-text{
+  font-size: 13px;
+  line-height: 1.25;
+  color: var(--ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.small{
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Actions row */
+.actions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+/* Logs: like archived notes */
+.log{
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.35);
+  padding: 12px;
+  min-height: 160px;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.10);
+}
+
+.log-item{
+  border: 1px dashed rgba(31,27,22,0.20);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.55);
+  margin: 10px 0;
+}
+
+.log-item .title{
+  font-weight: 800;
+  margin-bottom: 6px;
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: .4px;
+}
+
+.log-item.good{ border-color: rgba(47,125,73,0.35); }
+.log-item.bad{ border-color: rgba(180,59,46,0.35); }
+.log-item.note{ border-color: rgba(160,107,26,0.35); }
+.footer{
+  margin: 18px 0 8px;
+  padding: 10px 12px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  border-top: 1px dashed rgba(31,27,22,0.25);
+  font-family: "Courier New", Courier, monospace;
+}
